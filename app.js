@@ -1,81 +1,68 @@
-// Инициализация слайдера и навигации
-document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.slider');
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    const slides = slider ? slider.querySelectorAll('img') : [];
-    let currentIndex = 0;
+// Слайдер
+const slider = document.querySelector('.slider');
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+const slides = Array.from(slider.querySelectorAll('img'));
+const slideCount = slides.length;
+let slideIndex = 0;
 
-    if (slider && slides.length > 0) {
-        // Устанавливаем ширину слайдера
-        slider.style.width = `${slides.length * 100}%`;
+prevButton.addEventListener('click', showPreviousSlide);
+nextButton.addEventListener('click', showNextSlide);
 
-        function goToSlide(index) {
-            if (index < 0) {
-                index = slides.length - 1;
-            } else if (index >= slides.length) {
-                index = 0;
-            }
-            currentIndex = index;
-            const offset = -currentIndex * (100 / slides.length);
-            slider.style.transform = `translateX(${offset}%)`;
-        }
+function showPreviousSlide() {
+    slideIndex = (slideIndex - 1 + slideCount) % slideCount;
+    updateSlider();
+}
 
-        if (prevButton) {
-            prevButton.addEventListener('click', () => {
-                goToSlide(currentIndex - 1);
-            });
-        }
+function showNextSlide() {
+    slideIndex = (slideIndex + 1) % slideCount;
+    updateSlider();
+}
 
-        if (nextButton) {
-            nextButton.addEventListener('click', () => {
-                goToSlide(currentIndex + 1);
-            });
-        }
+function updateSlider() {
+    slides.forEach((slide, index) => {
+        slide.style.display = index === slideIndex ? 'block' : 'none';
+    });
+}
 
-        // Автоматическая смена слайдов
-        setInterval(() => {
-            goToSlide(currentIndex + 1);
-        }, 5000); 
+updateSlider();
 
-        goToSlide(0);
-    }
-
-    // Логика кнопки "Вверх"
-    const scrollToTopButton = document.getElementById('scrollToTopButton');
-
-    if (scrollToTopButton) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollToTopButton.style.display = 'block';
-            } else {
-                scrollToTopButton.style.display = 'none';
-            }
-        });
-
-        scrollToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-});
-
-// Логика полноэкранного просмотра изображения
-function openFullscreenImage(imgElement) {
+// Полноэкранный режим
+function openFullscreenImage(element) {
     const fullscreenContainer = document.getElementById('fullscreen-container');
     const fullscreenImage = document.getElementById('fullscreen-image');
-    
-    if (fullscreenContainer && fullscreenImage) {
-        fullscreenImage.src = imgElement.src;
-        fullscreenContainer.classList.add('visible');
-    }
+    fullscreenImage.src = element.src;
+    fullscreenContainer.style.display = 'block';
 }
 
 function closeFullscreenImage() {
     const fullscreenContainer = document.getElementById('fullscreen-container');
-    if (fullscreenContainer) {
-        fullscreenContainer.classList.remove('visible');
+    fullscreenContainer.style.display = 'none';
+}
+
+// Кнопка "Наверх"
+window.onscroll = function() { scrollFunction(); };
+
+function scrollFunction() {
+    const button = document.getElementById('scrollToTopButton');
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
     }
+}
+
+document.getElementById('scrollToTopButton').addEventListener('click', function() {
+    scrollToTop();
+});
+
+function scrollToTop() {
+    const scrollStep = -window.scrollY / 15;
+    const scrollInterval = setInterval(function() {
+        if (window.scrollY !== 0) {
+            window.scrollBy(0, scrollStep);
+        } else {
+            clearInterval(scrollInterval);
+        }
+    }, 15);
 }

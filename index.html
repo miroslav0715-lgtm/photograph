@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иван Петров | Фотограф</title>
+    <link type="image/x-icon" href="img/logo.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.jpg" alt="Логотип">
+        </div>
+        <h1 class="site-title">Иван Петров | Профессиональный фотограф</h1>
+        <nav>
+            <ul>
+                <li><a href="#section1">Обо мне</a></li>
+                <li><a href="#section2">Портфолио</a></li>
+                <li><a href="#section3">Услуги</a></li>
+                <li><a href="#section4">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="slider-container">
+        <div class="slider">
+            <img src="img/slide1.jpg" height="400" onclick="openFullscreenImage(this)" alt="Слайд 1">
+            <img src="img/slide2.jpg" height="400" onclick="openFullscreenImage(this)" alt="Слайд 2">
+            <img src="img/slide3.jpg" height="400" onclick="openFullscreenImage(this)" alt="Слайд 3">
+        </div>
+        <button class="prev-button" aria-label="Предыдущий слайд">&lt;</button>
+        <button class="next-button" aria-label="Следующий слайд">&gt;</button>
+    </div>
+
+    <section id="section1">
+        <div class="text-block">
+            <h1>О фотографе</h1>
+            <p>Привет! Меня зовут Иван, и я профессиональный фотограф с 10-летним опытом. Моя страсть — запечатлевать настоящие эмоции и уникальные моменты жизни.</p>
+            <p>Работаю в различных жанрах: портретная, свадебная, предметная съемка. Люблю естественный свет и минималистичные композиции.</p>
+        </div>
+    </section>
+
+    <section id="section2">
+        <h2 class="section-title">Галерея работ</h2>
+        <div class="gallery">
+            <img src="img/gallery1.jpg" class="gallery-img" onclick="openFullscreenImage(this)" alt="Галерея 1">
+            <img src="img/gallery2.jpg" class="gallery-img" onclick="openFullscreenImage(this)" alt="Галерея 2">
+            <img src="img/gallery3.jpg" class="gallery-img" onclick="openFullscreenImage(this)" alt="Галерея 3">
+            <img src="img/gallery4.jpg" class="gallery-img" onclick="openFullscreenImage(this)" alt="Галерея 4">
+        </div>
+    </section>
+
+    <section id="section3">
+        <h2 class="section-title">Услуги и цены</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Свадебная съемка</h3>
+                <p>Полный день съемки, обработка, 100+ фото</p>
+                <p class="price">от 30 000 ₽</p>
+            </div>
+            <div class="service">
+                <h3>Портретная съемка</h3>
+                <p>2 часа съемки, 30 обработанных фото</p>
+                <p class="price">от 8 000 ₽</p>
+            </div>
+            <div class="service">
+                <h3>Предметная съемка</h3>
+                <p>Для каталогов, рекламы, соцсетей</p>
+                <p class="price">от 5 000 ₽</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="section4">
+        <h2 class="section-title">Свяжитесь со мной</h2>
+        <form class="contact-form" autocomplete="off" method="post">
+            <div class="form-group">
+                <label>Имя <span>*</span></label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Email <span>*</span></label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Сообщение</label>
+                <textarea name="message" rows="4"></textarea>
+            </div>
+            <input class="submit-btn" type="submit" value="Отправить">
+        </form>
+    </section>
+
+    <div id="fullscreen-container" class="hidden">
+        <span class="close-button" onclick="closeFullscreenImage()">&times;</span>
+        <img src="" alt="Полноэкранное изображение" id="fullscreen-image">
+    </div>
+
+    <button id="scrollToTopButton">Вверх</button>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://instagram.com" class="social-icon"><img src="img/ig.png" alt="Instagram"></a>
+            <a href="https://vk.com" class="social-icon"><img src="img/vk.png" alt="VK"></a>
+            <a href="https://telegram.org" class="social-icon"><img src="img/tg.png" alt="Telegram"></a>
+        </div>
+        <p>© 2023 Иван Петров. Все права защищены.</p>
+    </footer>
+</body>
+</html>
